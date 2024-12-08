@@ -1,8 +1,8 @@
-const UserServices = require('../services/UserServices')
+const createUserService = require('../services/UserServices')
 const createUser = async (req, res) => {
     const payload = req.body
 
-    const UserResponse = await UserServices.createUser({
+    const UserResponse = await createUserService({
         username: payload.username,
         email: payload.email,
         password: payload.password
