@@ -1,4 +1,5 @@
 const express = require('express')
+const createUser = require('../controllers/userController')
 
 const RegisterRoute = express.Router()
 
@@ -7,9 +8,6 @@ RegisterRoute.get('/', (req, res) => {
     res.render('register')
 })
 
-RegisterRoute.post('/', () => {
-    //set what to do when post method hit login route
-    console.log('post method hits')
-})
+RegisterRoute.post('/', createUser)
 
 module.exports = RegisterRoute
