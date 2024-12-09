@@ -8,6 +8,8 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT
 const APP_URL = process.env.APP_URL
+const connectionUrl = process.env.connectionUrl
+const sessionSecret = process.env.SESSION_SECRET
 
 
 app.set('view engine', 'ejs')
@@ -17,6 +19,15 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 dbConnection()
+app.use(
+    session({
+        secret: sessionSecret, // Replace with a strong secret
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: connectionUrl }),
+        cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1-day session expiry
+    })
+);
 
 app.get('/', (req, res) => {
     res.status(200).send('Successful');
