@@ -1,5 +1,5 @@
 const UserModel = require('../models/UserModel')
-const createUser = async ({username, email, password}) => {
+const Signup = async ({username, email, password}) => {
    const newUser = {
     username: username,
     email: email,
@@ -21,10 +21,47 @@ const createUser = async ({username, email, password}) => {
         return {
             code: 500,
             success: false,
-            data: null,
             message: 'unable to create account'
         }
     }
 }
 
-module.exports = createUser
+const Login = async (email, password) => {
+    try{
+        const user = await UserModel.findOne({email})
+
+        if(!user){
+            return{
+                code: 401,
+                success: false,
+                message: 'Invalid Credentials'
+            }
+        }
+        const isValid = await user.isValidPassword(password)
+        if(!isValid){
+            return{
+                code: 401,
+                success: false,
+                message: 'Invalid Credentials'
+            }
+        }
+        return {
+            code: 200,
+            success: true,
+            data: {
+                user: user
+            },
+            message: 'Login Successful!'
+        }
+    }
+    catch(err){
+        return {
+            code: 500,
+            success: false,
+            message: 'unable to login'
+        }
+
+    }
+}
+
+module.exports = { Signup, Login }
