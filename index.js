@@ -1,5 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const LoginRoute = require('./routes/LoginRoute')
 const RegisterRoute = require('./routes/RegisterRoute')
 const dbConnection = require('./utils/db')
@@ -36,6 +38,15 @@ app.get('/', (req, res) => {
 
 app.use('/login', LoginRoute)
 app.use('/register', RegisterRoute)
+
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Error logging out');
+        }
+        res.redirect('/login');
+    });
+});
 
 
 
