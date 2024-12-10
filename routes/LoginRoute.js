@@ -5,9 +5,13 @@ const { LoginUser } = require('../controllers/userController')
 const LoginRoute = express.Router()
 
 LoginRoute.get('/', (req, res) => {
-    res.render('login', {message: ''});
+    //redirect to dashboard if session is active
+    if(req.session.user){
+        return res.redirect('/dashboard')
+    }else{
+        res.render('login', {message: ''});
+    }
 })
-
 LoginRoute.post('/', LoginUser)
 
 module.exports = LoginRoute

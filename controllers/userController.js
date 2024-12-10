@@ -20,13 +20,11 @@ const LoginUser = async (req, res) => {
 
     const LoginResponse = await AuthService.Login(email, password)
     if(!LoginResponse.success){
-        res.status(LoginResponse.code).render('login', { message: LoginResponse.message })
+        return res.status(LoginResponse.code).render('login', { message: LoginResponse.message })
     }else{
-
-    console.log(LoginResponse)
-    const { user } = LoginResponse.data
-    req.session.userId = user._id;
-    res.render('welcome', {user: user, message: LoginResponse.message})
+        const { user } = LoginResponse.data
+        req.session.user = { id: user._id, username: user.username, email: user.email };
+        res.status(LoginResponse.code).redirect('/dashboard')
     }
 
 }
