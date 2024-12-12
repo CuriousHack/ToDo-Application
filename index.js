@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongo');
 const LoginRoute = require('./routes/LoginRoute')
 const RegisterRoute = require('./routes/RegisterRoute')
 const dashboardRoute = require('./routes/DashboardRoute')
+const todoRoute = require('./routes/todoRoute')
 const { isAuthenticated } = require('./middlewares/authMiddleware')
 const dbConnection = require('./utils/db')
 dotenv.config()
@@ -40,7 +41,8 @@ app.get('/', (req, res) => {
 
 app.use('/login', LoginRoute)
 app.use('/register', RegisterRoute)
-app.use('/dashboard',isAuthenticated, dashboardRoute)
+app.use('/dashboard', isAuthenticated, dashboardRoute)
+app.use('/todo', isAuthenticated, todoRoute)
 app.post('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
