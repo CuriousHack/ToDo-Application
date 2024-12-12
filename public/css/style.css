@@ -1,0 +1,67 @@
+/* Floating button styling */
+/* .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5D54A4;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  /* Hover effect */
+  /* .floating-btn:hover {
+    background-color: #6C63AC;
+    transform: scale(1.1);
+  } */
+
+  #toggleButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5D54A4;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#toggleButton:hover {
+    background-color: #6C63AC;
+    transform: scale(1.1);
+  }
+
+#formContainer {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 250px;
+}
+
+.hidden {
+    display: none;
+}
