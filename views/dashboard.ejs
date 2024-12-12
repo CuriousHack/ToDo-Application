@@ -3,13 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
     <title>Welcome page</title>
 </head>
 <body>
     
     <p>Welcome <%= user.username %> </p>
+
+    <!-- create todo form  -->
+    <button id="toggleButton">+</button>
+    <div id="formContainer" class="hidden">
+        <form action="/todo" method="POST">
+            <label for="name">Todo:</label>
+            <input type="text" id="todo" name="title">
+            <br><br>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <ul>
+        <% if (todos.length > 0) { %>
+            <% todos.forEach(todo => { %>
+                <li>
+                    <!-- <span style="<%= todo.completed ? 'text-decoration: line-through;' : '' %>"> -->
+                        <%= todo.title %>
+                    <!-- </span> -->
+                </li>
+            <% }) %>
+        <% } else { %>
+            <p>No todos yet. Add some!</p>
+        <% } %>
+    </ul>
+
+
+
+    <!-- logout form  -->
     <form action="/logout" method="post">
         <button type="submit">Logout</button>
     </form>
 </body>
+<script src="/js/script.js"></script>
 </html>
