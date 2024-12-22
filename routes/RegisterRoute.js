@@ -4,7 +4,7 @@ const { createUser } = require('../controllers/userController')
 const RegisterRoute = express.Router()
 
 RegisterRoute.get('/', (req, res) => {
-    //set whatto do when login route is hit
+    //set what to do when login route is hit
     res.render('register')
 })
 
