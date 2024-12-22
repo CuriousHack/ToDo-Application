@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override');
 const LoginRoute = require('./routes/LoginRoute')
 const RegisterRoute = require('./routes/RegisterRoute')
 const dashboardRoute = require('./routes/DashboardRoute')
@@ -20,8 +21,9 @@ const sessionSecret = process.env.SESSION_SECRET
 app.set('view engine', 'ejs')
 
 app.use(express.static("public"))
-app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
+app.use(express.json())
 
 dbConnection()
 app.use(
