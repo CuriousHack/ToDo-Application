@@ -6,13 +6,14 @@ const createUser = async (req, res) => {
         username: payload.username,
         email: payload.email,
         password: payload.password
-    })
+    }, {new: true})
 
     if(!SignupResponse.success){
         res.status(SignupResponse.code).render('/register')
     }
     const { user } = SignupResponse.data
-    res.status(SignupResponse.code).render('welcome', {user: user, message: SignupResponse.message})
+    req.session.user = { id: user._id, username: user.username, email: user.email };
+    res.status(SignupResponse.code).redirect('/dashboard')
 }
 
 const LoginUser = async (req, res) => {
