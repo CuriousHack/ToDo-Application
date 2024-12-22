@@ -8,40 +8,151 @@
     <title>Welcome page</title>
 </head>
 <body>
+
+    <div class="container">
+        <div class="main-sect">
+            <div class="banner">
+                <h1>Hello <%= user.username %></h1>
+                <h2><%= completedPercentage %>% of your tasks are completed</h2>
+            </div>
+            <div class="tasks">
+                <div class="pending">
+                    <div class="list-container">
+                        <h2>Pending ToDo's</h2>
+                        <% if (todos.length > 0) { %>
+                            <% todos.forEach(todo => { %>
+                                <% if (todo.status === "pending") { %> <!-- Check if the todo's status is "pending" -->
+                                    <div class="list-item">
+                                        <span><%= todo.title %></span>
+                                        <details class="dropdown">
+                                            <summary role="button">
+                                                <a class="button">⋮</a>
+                                            </summary>
+                                            <ul>
+                                                <li>
+                                                    <!-- Form to mark as completed -->
+                                                    <form action="/todo/update/<%= todo._id %>?_method=PUT" method="POST" style="display: inline;">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button type="submit" name="action" value="completed">Mark as completed</button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <!-- Form to delete -->
+                                                    <form action="/todo/update/<%= todo._id %>?_method=PUT" method="POST" style="display: inline;">
+                                                        <button type="submit" name="action" value="deleted">Delete</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </div>
+                                <% } %>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No todos yet. Add some!</p>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="completed">
+                    <div class="list-container">
+                        <h2>Completed ToDo's</h2>
+                        <% if (todos.length > 0) { %>
+                            <% todos.forEach(todo => { %>
+                                <% if (todo.status === "completed") { %> <!-- Check if the todo's status is "completed" -->
+                                    <div class="list-item">
+                                        <span><%= todo.title %></span>
+                                        <details class="dropdown">
+                                            <summary role="button">
+                                                <a class="button">⋮</a>
+                                            </summary>
+                                            <ul>
+                                                <li>
+                                                    <!-- Form to mark as completed -->
+                                                    <form action="/todo/update/<%= todo._id %>?_method=PUT" method="POST" style="display: inline;">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button type="submit" name="action" value="pending">Mark as Pending</button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <!-- Form to mark as completed -->
+                                                    <form action="/todo/update/<%= todo._id %>?_method=PUT" method="POST" style="display: inline;">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button type="submit" name="action" value="deleted">Delete</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </div>
+                                <% } %>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No todos yet. Add some!</p>
+                        <% } %>
+                    </div>
+                </div>
+
+                            <!-- create todo form  -->
+                <button id="toggleButton">+</button>
+                <div id="formContainer" class="hidden">
+                    <form action="/todo" method="POST">
+                        <label for="name">Todo:</label>
+                        <input type="text" id="todo" name="title" required>
+                        <br><br>
+                        <button type="submit">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="side-bar">
+            <div class="extend">                
+                    <!-- logout form  -->
+                <form action="/logout" method="post">
+                    <button class="logout" type="submit">Logout</button>
+                </form>
+
+
+                <!-- recyclebin side  -->
+                <div class="list-container">
+                    <h2>Recycle Bin</h2>
+                    <% if (todos.length > 0) { %>
+                        <% todos.forEach(todo => { %>
+                            <% if (todo.status === "deleted") { %> <!-- Check if the todo's status is "pending" -->
+                                <div class="list-item">
+                                    <span><%= todo.title %></span>
+                                    <details class="dropdown">
+                                        <summary role="button">
+                                            <a class="button">⋮</a>
+                                        </summary>
+                                        <ul>
+                                            <li>
+                                                <!-- Form to mark as completed -->
+                                                <form action="/todo/update/<%= todo._id %>?_method=PUT" method="POST" style="display: inline;">
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <button type="submit" name="action" value="pending">Restore</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <!-- Form to delete -->
+                                                <form action="/todo/delete/<%= todo._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                                    <button type="submit" name="action" value="deleted">Delete permanently</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </details>
+                                </div>
+                            <% } %>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No todos yet. Add some!</p>
+                    <% } %>
+                </div>
+
+            <!-- recycle bin ends here  -->
+            </div>
+            
+        </div>
+      </div>
     
-    <p>Welcome <%= user.username %> </p>
-
-    <!-- create todo form  -->
-    <button id="toggleButton">+</button>
-    <div id="formContainer" class="hidden">
-        <form action="/todo" method="POST">
-            <label for="name">Todo:</label>
-            <input type="text" id="todo" name="title">
-            <br><br>
-            <button type="submit">Create</button>
-        </form>
-    </div>
-
-    <ul>
-        <% if (todos.length > 0) { %>
-            <% todos.forEach(todo => { %>
-                <li>
-                    <!-- <span style="<%= todo.completed ? 'text-decoration: line-through;' : '' %>"> -->
-                        <%= todo.title %>
-                    <!-- </span> -->
-                </li>
-            <% }) %>
-        <% } else { %>
-            <p>No todos yet. Add some!</p>
-        <% } %>
-    </ul>
-
-
-
-    <!-- logout form  -->
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
+    
 </body>
 <script src="/js/script.js"></script>
 </html>

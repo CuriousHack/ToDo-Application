@@ -3,6 +3,7 @@ const todoModel = require('../models/TodoModel')
 
 const dashboardController = async (req, res) => {
     try{
+        //percentage of completed against all active todos
         const completedCount = await todoModel.countDocuments({ user_id: req.session.user.id, status: 'completed' });
         const pendingCount = await todoModel.countDocuments({ user_id: req.session.user.id, status: 'pending' });
         const totalRelevantTodos = completedCount + pendingCount;
@@ -16,7 +17,6 @@ const dashboardController = async (req, res) => {
 
     }
     catch(err){
-        console.log(err)
         res.status(500).render('dashboard', {user: req.session.user, todos: [], message: 'error fetching todo'})
     }
 }
