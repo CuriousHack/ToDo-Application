@@ -1,29 +1,68 @@
-/* Floating button styling */
-/* .floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #5D54A4;
+:root {
+  --button-background: #5d54a4;
+  --button-color: white;
+  
+  --dropdown-highlight: #5d54a4;
+  --dropdown-width: 160px;
+  --dropdown-background: white;
+  --dropdown-color: black;
+}
+   body{
+    margin: 0;
+    padding: 0;
+   }
+
+   .container {
+    display: grid;
+    grid-template-columns: 9fr 3fr; /* 8/12 and 4/12 */
+    height: 100vh; /* Full height of the viewport */
+  }
+  
+  .main-sect {
+    background-color: #5D54A4; /* Blue */
     color: white;
-    font-size: 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s, background-color 0.2s;
+    flex-direction: column;
   }
   
-  /* Hover effect */
-  /* .floating-btn:hover {
-    background-color: #6C63AC;
-    transform: scale(1.1);
-  } */
+  .side-bar {
+    background-color: #9BA454; /* Green */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .extend{
+    width: 92%;
+  }
+  .logout{
+    background-color: #5D54A4;
+    width: 90%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+  }
+  .logout:hover{
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .banner, .tasks{
+    width: 96%;
+    margin: 2px 16px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #9BA454;
+  }
+
+  .tasks{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+  }
 
   #toggleButton {
     position: fixed;
@@ -46,7 +85,8 @@
 }
 
 #toggleButton:hover {
-    background-color: #6C63AC;
+    background-color: #9BA454;
+    color: #5D54A4;
     transform: scale(1.1);
   }
 
@@ -54,7 +94,7 @@
     position: fixed;
     bottom: 80px;
     right: 20px;
-    background-color: white;
+    background-color: #5D54A4;
     padding: 20px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -62,6 +102,204 @@
     width: 250px;
 }
 
+/* #formContainer input{
+  outline: none;
+  color: white;
+  background-color: red;
+  border-bottom: 2px solid #9BA454;
+} */
+
+#formContainer input{
+  border: none;
+  background: transparent;
+  color: #9BA454;
+  border-bottom: 2px solid white;
+}
+#formContainer input:focus{
+  outline: none;
+  color: white;
+  border-bottom: 2px solid #9BA454;
+}
+#formContainer button{
+  color: #5D54A4;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
 .hidden {
     display: none;
+}
+
+.list-container {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5D54A4;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  position: relative;
+}
+
+
+/* Boring button styles */
+a.button {
+  display: inline-block;
+  border: none;
+  /* background: var(--button-background); */
+  /* color: var(--button-color); */
+  font-size: 24px;
+  cursor: pointer;
+}
+
+a.button:active {
+  filter: brightness(75%);
+}
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  padding: 0;
+  margin-right: 1em;
+  
+  border: none;
+}
+
+.dropdown summary {
+  list-style: none;
+  list-style-type: none;
+}
+
+.dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown summary:focus a.button {
+  border: 2px solid white;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown ul {
+  position: absolute;
+  margin: 20px 0 0 0;
+  padding: 20px 0;
+  width: var(--dropdown-width);
+  left: 50%;
+  margin-left: calc((var(--dropdown-width) / 2)  * -1);
+  box-sizing: border-box;
+  z-index: 2;
+  
+  background: var(--dropdown-background);
+  border-radius: 6px;
+  list-style: none;
+}
+
+.dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown ul li a:link, .dropdown ul li a:visited, .dropdown ul li button {
+  display: inline-block;
+  padding: 10px 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  
+  color: var(--dropdown-color);
+  text-decoration: none;
+}
+.dropdown ul li button{
+  border: none;
+}
+
+.dropdown ul li a:hover, .dropdown ul li button:hover {
+  background-color: var(--dropdown-highlight);
+  color: var(--dropdown-background);
+}
+
+/* Dropdown triangle */
+.dropdown ul::before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent var(--dropdown-background) transparent;
+}
+
+
+/* Close the dropdown with outside clicks */
+.dropdown > summary::before {
+  display: none;
+}
+
+.dropdown[open] > summary::before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+
+
+.bgimg {
+  /* background-color: yellow !important; */
+  height: 100%;
+  color: white;
+  font-size: 25px;
+}
+
+/* Position text in the bottom-left corner */
+.bottomright {
+  position: absolute;
+  bottom: 40px;
+  right: 140px;
+}
+.bottomright a{
+  text-decoration: none;
+  color:#5D54A4;
+  background-color: #9BA454;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: large;
+  /* font-weight: 600; */
+
+}
+.bottomright a:hover{
+  /* font-weight: 800; */
+  transform: scale(1.1);
+}
+
+/* Position text in the middle */
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

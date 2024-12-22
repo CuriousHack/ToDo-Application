@@ -37,7 +37,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-    res.status(200).send('Successful');
+    res.status(200).render('welcome')
 })
 
 
@@ -50,7 +50,7 @@ app.post('/logout', (req, res) => {
         if (err) {
             return res.status(500).send('Error logging out');
         }
-        res.redirect('/login');
+        res.redirect('/');
     });
 });
 

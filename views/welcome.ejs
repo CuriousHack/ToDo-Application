@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
     <title>Welcome page</title>
 </head>
-<body>
-    
-    <p>Welcome <%= user.username %> </p>
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
+<body style="background-color: #5D54A4;">
+    <div class="bgimg">
+        <div class="middle">
+          <h1>DO IT</h1>
+          <p>Plan. Track. Achieve. All in One Place.</p>
+        </div>
+        <div class="bottomright">
+            <a href="/login">
+                <span>Get Started</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+        </a>
+
+          <!-- <p>Get Started</p> -->
+        </div>
+    </div>
 </body>
-<script>
-    const message = "<%= message %>";
-    alert(message);
-    </script>
 </html>
